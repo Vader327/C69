@@ -1,10 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
-import { createAppContainer } from 'react-navigation';
+import { Image } from 'react-native';
+import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import SearchScreen from './Screens/SearchScreen';
 import BookTransactionScreen from './Screens/BookTransactionScreen';
+import LoginScreen from './Screens/LoginScreen';
 
 const tabNavigator = createBottomTabNavigator({
   Transaction: {screen: BookTransactionScreen},
@@ -23,7 +24,12 @@ const tabNavigator = createBottomTabNavigator({
   }})
 })
 
-const AppContainer = createAppContainer(tabNavigator);
+const switchNavigator = createSwitchNavigator({
+  Login: {screen: LoginScreen},
+  "Tab Navigator": {screen: tabNavigator},
+})
+
+const AppContainer = createAppContainer(switchNavigator);
 
 export default class App extends React.Component {
   render(){
